@@ -9,3 +9,4 @@ import com.jociel.apicadastro.entidade.Usuario;
 public interface UsuarioBanco extends CrudRepository<Usuario, Integer>{
     
 }
+//*teste */
