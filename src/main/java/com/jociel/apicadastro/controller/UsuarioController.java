@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.jociel.apicadastro.banco.UsuarioBanco;
@@ -31,5 +32,17 @@ public class UsuarioController {
     public void cadastrar(@RequestBody Usuario novousuario){
         acessoBanco.save(novousuario);
         }
+    
+    @PutMapping("/alterar/{id}")
+    public void alterar(@PathVariable int id, @RequestBody Usuario usuario){
+        acessoBanco.findById(id).map(user ->{
+            user.setNome(usuario.getNome());
+            user.setUsuario(usuario.getUsuario());
+            user.setEmail(usuario.getEmail());
+            user.setSenha(usuario.getSenha());
+            return acessoBanco.save(user);
+        } );
+    } 
+     
     
 }
